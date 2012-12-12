@@ -71,7 +71,7 @@ Database.on("error", function(err) {
 	console.log("DATABASE ERROR: ", err);
 })
 
-Database.insert({lol: 1, fart: 1, knob: "lol"}).into("tablee").execute();
+Database.insert({user: 1, name: "root", handle: "root"}).into("tablee").execute();
 
 Hinge.listen(3000);
 
