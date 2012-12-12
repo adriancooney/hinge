@@ -1,0 +1,14 @@
+{
+  "name": "hinge",
+  "version": "0.0.1",
+  "description": "A REST API framework.",
+  "main": "lib/Hinge.js",
+  "repository": "",
+  "keywords": [
+    "rest",
+    "api",
+    "framework"
+  ],
+  "author": "Adrian Cooney",
+  "license": "BSD"
+}
