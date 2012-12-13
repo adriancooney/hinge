@@ -25,16 +25,6 @@ Router.hook(/^!(\w+)/, function(route, regex) {
 	}
 });
 
-Router.hook(/fat(\w+)/, function(route, regex) {
-	return {
-		parsed: regex[1],
-		callback: function(req, res, next) {
-			console.log("Damn son, you is fat!");
-			next();
-		}
-	}
-})
-
 Router.group("/user", {
 	"!GET": function(req, res) {
 		res.send("Authorized!");
@@ -57,13 +47,6 @@ Router.group("/user", {
 		"GET": function() {
 
 		}
-	},
-
-	"john": {
-		"fatGET": function(req, res, next) {
-			console.log("Lol!");
-			//res.send("lol");
-		}
 	}
 });
 
@@ -71,7 +54,19 @@ Database.on("error", function(err) {
 	console.log("DATABASE ERROR: ", err);
 })
 
-Database.insert({user: 1, name: "root", handle: "root"}).into("tablee").execute();
+Database.insert({username: "adrian", age: 17})
+		.into("users").execute();
+
+Database.select(["username", "age"])
+		.from("users")
+		.where({username: "adrian"})
+		.orderby("username", "ASC")
+		.limit(0, 10)
+		.execute(function(err, rows) {
+			console.log("DATA: ", rows);
+		});
+
+console.log(Database);
 
 Hinge.listen(3000);
 
