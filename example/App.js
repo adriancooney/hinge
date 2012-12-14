@@ -10,8 +10,17 @@ var express = require("express"),
 
 var Hinge = require("../lib/Hinge.js").init(app, mysql);
 
+var UserModel = require("./models/User");
+
 //Globalize the plugs
 Hinge.globalize();
+
+UserModel.create({
+	username: "adrian"
+});
+
+console.log(UserModel.orderTablesBasedOnImportance());
+console.log(UserModel);
 
 //Add permission hook to routes
 //Any routes with ! prefix need to be authorized
@@ -52,7 +61,7 @@ Router.group("/user", {
 
 Database.on("error", function(err) {
 	console.log("DATABASE ERROR: ", err);
-})
+});
 
 Database.insert({username: "adrian", age: 17})
 		.into("users").execute();
@@ -63,10 +72,8 @@ Database.select(["username", "age"])
 		.orderby("username", "ASC")
 		.limit(0, 10)
 		.execute(function(err, rows) {
-			console.log("DATA: ", rows);
+			//console.log("DATA: ", rows);
 		});
-
-console.log(Database);
 
 Hinge.listen(3000);
 
